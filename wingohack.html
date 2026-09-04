@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR Team Wingo 30s Hack</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            user-select: none;
+            background-color: #050505;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* প্রিমিয়াম মাল্টি-কালার রেইনবো বর্ডার ও গ্লোয়িং ইফেক্ট */
+        @keyframes rainbowBorder {
+            0% { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+            14% { border-color: #ff7700; box-shadow: 0 0 25px rgba(255, 119, 0, 0.5); }
+            28% { border-color: #ffff00; box-shadow: 0 0 25px rgba(255, 255, 0, 0.5); }
+            42% { border-color: #00ff00; box-shadow: 0 0 25px rgba(0, 255, 0, 0.5); }
+            57% { border-color: #00ffff; box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); }
+            71% { border-color: #0000ff; box-shadow: 0 0 25px rgba(0, 0, 255, 0.5); }
+            85% { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 0.5); }
+            100% { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+        }
+
+        @keyframes rainbowHeader {
+            0% { background: linear-gradient(90deg, #ff0000, #ff7700); }
+            20% { background: linear-gradient(90deg, #ff7700, #ffff00); }
+            40% { background: linear-gradient(90deg, #ffff00, #00ff00); }
+            60% { background: linear-gradient(90deg, #00ff00, #00ffff); }
+            80% { background: linear-gradient(90deg, #00ffff, #ff00ff); }
+            100% { background: linear-gradient(90deg, #ff00ff, #ff0000); }
+        }
+
+        #hack-panel {
+            position: absolute;
+            top: 80px;
+            left: 15px;
+            width: 285px;
+            background: rgba(10, 15, 20, 0.92);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            border-radius: 10px;
+            z-index: 9999;
+            border: 2px solid #00ffcc;
+            animation: rainbowBorder 6s infinite;
+            touch-action: none;
+        }
+
+        .panel-header {
+            animation: rainbowHeader 6s infinite;
+            color: #000;
+            padding: 8px 12px;
+            font-weight: 900;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: move;
+        }
+
+        .header-btns button {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 3px;
+            padding: 2px 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .panel-body {
+            padding: 12px;
+        }
+
+        .market-badge {
+            width: 100%;
+            padding: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin: 6px 0;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 7px;
+            border-radius: 4px;
+            border-left: 3px solid #00ffcc;
+        }
+
+        .result-box {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 9px;
+            margin: 8px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #ffcc00;
+            text-align: center;
+            font-weight: bold;
+            border: 1px dashed rgba(255, 204, 0, 0.6);
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+        }
+
+        .status-box {
+            font-size: 12px;
+            text-align: center;
+            padding: 7px;
+            font-weight: bold;
+            margin-top: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            color: #050505;
+            border: none;
+            padding: 9px;
+            font-weight: 900;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+            transition: 0.2s;
+        }
+
+        .btn:active {
+            opacity: 0.8;
+        }
+
+        #floating-icon {
+            position: absolute;
+            top: 80px;
+            left: 15px;
+            width: 52px;
+            height: 52px;
+            background: radial-gradient(circle, #ff00ff 0%, #00ffff 100%);
+            color: #000;
+            border-radius: 50%;
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 11px;
+            box-shadow: 0 0 15px #ff00ff;
+            cursor: pointer;
+            border: 2px solid #fff;
+            touch-action: none;
+        }
+
+        #login-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.96);
+            z-index: 10006;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: rgba(15, 20, 25, 0.95);
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #ff00ff;
+            width: 80%;
+            max-width: 300px;
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+        }
+
+        .login-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #000;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            border-radius: 5px;
+            text-align: center;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe src="https://hgnice1.com/#/regis"></iframe>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h3 style="color: #ff00ff; margin-top:0;">SR VIP LOGIN</h3>
+            <input type="password" id="password-input" placeholder="Enter Password">
+            <br>
+            <button class="btn" onclick="checkPassword()">Login</button>
+            <p id="error-msg" style="color: red; font-size: 12px; margin-top: 5px;"></p>
+        </div>
+    </div>
+
+    <div id="floating-icon" onclick="restorePanel()">SR HACK</div>
+
+    <div id="hack-panel">
+        <div class="panel-header" id="panel-header">
+            <span>SR TEAM HACK</span>
+            <div class="header-btns">
+                <button onclick="minimizePanel()">_</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="market-badge">Wingo 30s Live Market</div>
+
+            <div class="info-row">
+                <span>Period No:</span>
+                <span id="period-num" style="color: #ffff00; font-weight: bold;">Syncing...</span>
+            </div>
+
+            <div class="info-row">
+                <span>Prediction:</span>
+                <span id="pred-val" style="color: #00ffff; font-weight: bold;">Waiting</span>
+            </div>
+
+            <div class="result-box" id="prediction-text">Click Start Hack</div>
+            
+            <div class="status-box" id="status-text" style="color: #aaa;">Status: Ready</div>
+
+            <button class="btn" onclick="startHack()">Start Hack</button>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "Review_Den_Ar_Hack_Nen";
+        let isRunning = false;
+        let currentActivePeriod = "";
+        let countdownInterval = null;
+
+        function checkPassword() {
+            let pass = document.getElementById("password-input").value;
+            if(pass === correctPassword) {
+                document.getElementById("login-screen").style.display = "none";
+                startLivePeriodTimer();
+            } else {
+                document.getElementById("error-msg").innerText = "Pass vul diyeche!";
+            }
+        }
+
+        function startLivePeriodTimer() {
+            updateLivePeriod();
+            setInterval(updateLivePeriod, 100);
+        }
+
+        function updateLivePeriod() {
+            let now = new Date();
+            let year = now.getFullYear();
+            let month = String(now.getMonth() + 1).padStart(2, '0');
+            let day = String(now.getDate()).padStart(2, '0');
+            
+            let totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+            let totalDaysEpoch = Math.floor(now.getTime() / 1000);
+            
+            let baseIndex = Math.floor(totalSeconds / 30) + (Math.floor(totalDaysEpoch / 86400) * 2880);
+            let periodIndex = (Math.floor(baseIndex / 1000) * 1000) + 458; 
+            
+            currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
+            document.getElementById("period-num").innerText = currentActivePeriod;
+        }
+
+        function startHack() {
+            if (isRunning) return;
+            isRunning = true;
+
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            let options = ["BIG", "SMALL", "RED", "GREEN"];
+            let chosenPred = options[Math.floor(Math.random() * options.length)];
+
+            // সিগন্যাল আসার সময় কালার পরিবর্তন ও গ্লোয়িং ইফেক্ট
+            let predColor = (chosenPred === "BIG" || chosenPred === "RED") ? "#ff0055" : "#00ff66";
+            let predElement = document.getElementById("pred-val");
+            predElement.innerText = chosenPred;
+            predElement.style.color = predColor;
+            predElement.style.textShadow = `0 0 10px ${predColor}`;
+
+            document.getElementById("prediction-text").innerText = "Target: " + chosenPred;
+
+            let now = new Date();
+            let currentSec = now.getSeconds() % 30; 
+            let remainingSeconds = 30 - currentSec; 
+
+            let timeLeft = remainingSeconds;
+            document.getElementById("status-textinnerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
+
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    document.getElementById("status-text").innerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
+                } else {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                let actualResults = ["BIG", "SMALL", "RED", "GREEN"];
+                let finalRes = actualResults[Math.floor(Math.random() * actualResults.length)];
+                
+                let isWin = (finalRes === chosenPred);
+                if(isWin) {
+                    document.getElementById("status-text").innerHTML = "Result: " + finalRes + " <span style='color: #00ff66;'>[ WIN ✅ ]</span>";
+                } else {
+                    document.getElementById("status-text").innerHTML = "Result: " + finalRes + " <span style='color: #ff0055;'>[ LOSS ❌ ]</span>";
+                }
+                isRunning = false;
+            }, remainingSeconds * 1000);
+        }
+
+        function minimizePanel() {
+            document.getElementById("hack-panel").style.display = "none";
+            let floatingIcon = document.getElementById("floating-icon");
+            floatingIcon.style.display = "flex";
+            floatingIcon.style.top = panel.style.top;
+            floatingIcon.style.left = panel.style.left;
+        }
+
+        function restorePanel() {
+            let floatingIcon = document.getElementById("floating-icon");
+            floatingIcon.style.display = "none";
+            document.getElementById("hack-panel").style.display = "block";
+        }
+
+        const panel = document.getElementById("hack-panel");
+        const header = document.getElementById("panel-header");
+        let isDragging = false, startX, startY;
+
+        header.addEventListener("mousedown", dragStart);
+        document.getElementById("hack-panel").addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", dragEnd);
+
+        header.addEventListener("touchstart", dragStart);
+        document.addEventListener("touchmove", drag);
+        document.addEventListener("touchend", dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            let clientX = e.clientX || e.touches[0].clientX;
+            let clientY = e.clientY || e.touches[0].clientY;
+            startX = clientX - panel.offsetLeft;
+            startY = clientY - panel.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            let clientX = e.clientX || e.touches[0].clientX;
+            let clientY = e.clientY || e.touches[0].clientY;
+            
+            let currentX = clientX - startX;
+            let currentY = clientY - startY;
+            
+            panel.style.left = currentX + "px";
+            panel.style.top = currentY + "px";
+        }
+
+        function dragEnd() {
+            isDragging = false;
+        }
+    </script>
+</body>
+</html>
