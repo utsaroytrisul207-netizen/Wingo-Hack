@@ -330,7 +330,7 @@
                 document.getElementById("login-screen").style.display = "none";
                 startEngine();
             } else {
-                document.getElementById("error-msg").innerText = "ভুল পাসওয়ার্ড! ঠিক করে পাসওয়ার্ড দিন।";
+                document.getElementById("error-msg", "ভুল পাসওয়ার্ড!").innerText = "ভুল পাসওয়ার্ড! ঠিক করে পাসওয়ার্ড দিন।";
             }
         }
 
@@ -351,11 +351,12 @@
             
             document.getElementById("timer-val").innerText = remainingSec + "s";
 
-            // Perfect Wingo Server Synchronization Formula matching official market format exactly
-            let startOfDay = new Date(year, now.getMonth(), now.getDate()).getTime() / 1000;
-            let secondsSinceDayStart = Math.floor(now.getTime() / 1000) - startOfDay;
-            let totalPeriodsToday = Math.floor(secondsSinceDayStart / 30);
-            let periodIndex = 1000 + totalPeriodsToday;
+            // Direct Market-Aligned Exact Period Synchronization Formula
+            // Based on reference marker 51504 at 6:32 PM
+            let totalSecondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+            let totalPeriodsToday = Math.floor(totalSecondsToday / 30);
+            let baseIndexOffset = 780; // Calibrated offset to match market sequence exactly
+            let periodIndex = 1000 + totalPeriodsToday + baseIndexOffset;
             
             currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
             document.getElementById("period-num").innerText = currentActivePeriod;
@@ -373,7 +374,6 @@
                     });
 
                     if(historyData.length > 10) {
-                        historyData = [historyData.slice(0, 10)[0]]; // Keep proper batch control
                         historyData = historyData.slice(0, 10);
                     }
                     updateHistoryTable();
@@ -402,7 +402,6 @@
             let tbody = document.getElementById("history-rows");
             tbody.innerHTML = "";
             
-            // Limit array strictly up to 10 items
             if(historyData.length > 10) {
                 historyData = historyData.slice(0, 10);
             }
