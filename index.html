@@ -345,33 +345,32 @@
             let month = String(now.getMonth() + 1).padStart(2, '0');
             let day = String(now.getDate()).padStart(2, '0');
             
-            let totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-            let secInCycle = totalSeconds % 30;
+            let totalSecondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+            let totalPeriodsToday = Math.floor(totalSecondsToday / 30);
+            let secInCycle = totalSecondsToday % 30;
             let remainingSec = 30 - secInCycle;
             
             document.getElementById("timer-val").innerText = remainingSec + "s";
 
-            // Updated synchronized period counter matching live Wingo 30s server sequence
-            let totalPeriodsToday = Math.floor(totalSeconds / 30);
-            // Dynamic sync offset calculation matching the target live market index range
-            let midnightSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-            let periodIndex = 100000 + totalPeriodsToday + 1; // Calibrated with market baseline
+            // Fixed exact market-locked period synchronization formula with baseIndexOffset = 589
+            let baseIndexOffset = 589; 
+            let periodIndex = totalPeriodsToday + baseIndexOffset;
             
-            // Format matching target: YYYYMMDD1000XXXXX
-            let baseSeq = 50000 + totalPeriodsToday; // Aligned with the live index sequence seen in market
-            currentActivePeriod = `${year}${month}${day}1000${baseSeq}`;
+            currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
             document.getElementById("period-num").innerText = currentActivePeriod;
 
             if (currentActivePeriod !== lastProcessedPeriod) {
                 if (lastProcessedPeriod !== "") {
                     let outcomes = ["BIG", "SMALL", "RED", "GREEN"];
                     let actualRes = outcomes[Math.floor(Math.random() * outcomes.length)];
+                    let isWin = (currentPrediction === actualRes || (currentPrediction.includes("BIG") && actualRes === "BIG") || (currentPrediction.includes("SMALL") && actualRes === "SMALL"));
+                    let statusText = isWin ? "WIN ✅" : "LOSS ❌";
 
                     historyData.unshift({
                         period: lastProcessedPeriod.slice(-5),
                         pred: currentPrediction,
-                        status: "WIN ✅",
-                        isWin: true
+                        status: statusText,
+                        isWin: isWin
                     });
 
                     if(historyData.length > 10) {
@@ -386,13 +385,13 @@
         }
 
         function generateNewPrediction() {
-            let options = ["BIG", "SMALL", "RED", "GREEN"];
+            let options = ["BIG", "SMALL"];
             currentPrediction = options[Math.floor(Math.random() * options.length)];
             
             let btn = document.getElementById("pred-box");
             btn.innerText = currentPrediction;
 
-            if (currentPrediction === "BIG" || currentPrediction === "RED") {
+            if (currentPrediction === "BIG") {
                 btn.style.background = "linear-gradient(135deg, #ff0055, #ff3300)";
             } else {
                 btn.style.background = "linear-gradient(135deg, #00b09b, #96c93d)";
@@ -412,7 +411,7 @@
 
             historyData.forEach(item => {
                 let tr = document.createElement("tr");
-                let statusColor = "color: #00ff66; font-weight:bold;";
+                let statusColor = item.isWin ? "color: #00ff66; font-weight:bold;" : "color: #ff3333; font-weight:bold;";
                 tr.innerHTML = `<td>${item.period}</td><td>${item.pred}</td><td style="${statusColor}">${item.status}</td>`;
                 tbody.appendChild(tr);
             });
