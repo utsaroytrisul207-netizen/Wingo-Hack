@@ -50,7 +50,6 @@
             box-sizing: border-box;
         }
 
-        /* Custom Scrollbar for panel */
         #hack-panel::-webkit-scrollbar {
             width: 4px;
         }
@@ -259,7 +258,6 @@
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ডে ইনভাইট কোড সহ রেজিস্ট্রেশন লিংক -->
     <iframe src="https://hgnice1.com/#/regis?inviteCode=728862139589"></iframe>
 
     <div id="login-screen">
@@ -387,14 +385,12 @@
                 btn.style.background = bgGradient;
                 btn.innerText = `${chosenPred} (${percent}%)`;
 
-                // Probability update
                 let oppPercent = 100 - percent;
                 if(chosenPred === "BIG" || chosenPred === "SMALL") {
                     document.getElementById("prob-big").innerText = `BIG: ${chosenPred === 'BIG' ? percent : oppPercent}%`;
                     document.getElementById("prob-small").innerText = `SMALL: ${chosenPred === 'SMALL' ? percent : oppPercent}%`;
                 }
 
-                // Add to history
                 let nowTime = new Date().toTimeString().split(' ')[0];
                 historyData.unshift({ time: nowTime, period: currentActivePeriod, pred: chosenPred });
                 if(historyData.length > 3) historyData.pop();
