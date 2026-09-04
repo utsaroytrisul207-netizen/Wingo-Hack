@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SR Team Wingo 30s Hack</title>
+    <title>SR VIP AI Hack - Wingo 30s</title>
     <style>
         body, html {
             margin: 0;
@@ -13,7 +13,7 @@
             overflow: hidden;
             font-family: 'Courier New', Courier, monospace;
             user-select: none;
-            background-color: #050505;
+            background-color: #0b0f19;
         }
 
         iframe {
@@ -27,155 +27,171 @@
         }
 
         @keyframes rainbowBorder {
-            0% { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
-            14% { border-color: #ff7700; box-shadow: 0 0 25px rgba(255, 119, 0, 0.5); }
-            28% { border-color: #ffff00; box-shadow: 0 0 25px rgba(255, 255, 0, 0.5); }
-            42% { border-color: #00ff00; box-shadow: 0 0 25px rgba(0, 255, 0, 0.5); }
-            57% { border-color: #00ffff; box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); }
-            71% { border-color: #0000ff; box-shadow: 0 0 25px rgba(0, 0, 255, 0.5); }
-            85% { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 0.5); }
-            100% { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
-        }
-
-        @keyframes rainbowHeader {
-            0% { background: linear-gradient(90deg, #ff0000, #ff7700); }
-            20% { background: linear-gradient(90deg, #ff7700, #ffff00); }
-            40% { background: linear-gradient(90deg, #ffff00, #00ff00); }
-            60% { background: linear-gradient(90deg, #00ff00, #00ffff); }
-            80% { background: linear-gradient(90deg, #00ffff, #ff00ff); }
-            100% { background: linear-gradient(90deg, #ff00ff, #ff0000); }
+            0% { border-color: #ff0055; box-shadow: 0 0 30px rgba(255, 0, 85, 0.4); }
+            50% { border-color: #00ffff; box-shadow: 0 0 30px rgba(0, 255, 255, 0.4); }
+            100% { border-color: #ff0055; box-shadow: 0 0 30px rgba(255, 0, 85, 0.4); }
         }
 
         #hack-panel {
             position: absolute;
-            top: 80px;
-            left: 15px;
-            width: 285px;
-            background: rgba(10, 15, 20, 0.92);
-            backdrop-filter: blur(8px);
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(12px);
             color: #fff;
-            border-radius: 10px;
+            border-radius: 14px;
             z-index: 9999;
-            border: 2px solid #00ffcc;
-            animation: rainbowBorder 6s infinite;
-            touch-action: none;
+            border: 2px solid #00ffff;
+            animation: rainbowBorder 5s infinite;
+            box-sizing: border-box;
+        }
+
+        /* Custom Scrollbar for panel */
+        #hack-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+        #hack-panel::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 10px;
         }
 
         .panel-header {
-            animation: rainbowHeader 6s infinite;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
             color: #000;
-            padding: 8px 12px;
+            padding: 10px 14px;
             font-weight: 900;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 13px;
             letter-spacing: 1px;
-            cursor: move;
         }
 
         .header-btns button {
             background: #000;
             color: #fff;
             border: 1px solid #fff;
-            border-radius: 3px;
+            border-radius: 4px;
             padding: 2px 8px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .panel-body {
-            padding: 12px;
+            padding: 14px;
         }
 
-        .market-badge {
-            width: 100%;
-            padding: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+        .ai-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #00ffff;
             margin-bottom: 10px;
             font-weight: bold;
+        }
+
+        .period-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
-            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .period-card span {
+            font-size: 11px;
+            color: #8b949e;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            margin: 6px 0;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 7px;
-            border-radius: 4px;
-            border-left: 3px solid #00ffcc;
+        .period-card h2 {
+            margin: 5px 0 0 0;
+            font-size: 17px;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
         }
 
-        .result-box {
-            background: rgba(0, 0, 0, 0.75);
-            padding: 9px;
-            margin: 8px 0;
-            border-radius: 5px;
-            font-size: 14px;
-            color: #ffcc00;
-            text-align: center;
-            font-weight: bold;
-            border: 1px dashed rgba(255, 204, 0, 0.6);
-            text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
-        }
-
-        .status-box {
-            font-size: 12px;
-            text-align: center;
-            padding: 7px;
-            font-weight: bold;
-            margin-top: 6px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 4px;
-            border: 1px solid #333;
-        }
-
-        .btn {
-            background: linear-gradient(90deg, #ff00ff, #00ffff);
-            color: #050505;
-            border: none;
-            padding: 9px;
-            font-weight: 900;
-            border-radius: 5px;
-            cursor: pointer;
+        .pred-btn-box {
             width: 100%;
-            margin-top: 8px;
-            box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+            padding: 14px;
+            background: linear-gradient(135deg, #ff0055, #ff3300);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.5);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
             transition: 0.2s;
         }
 
-        .btn:active {
-            opacity: 0.8;
+        .prob-section {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border: 1px solid #21262d;
         }
 
-        #floating-icon {
-            position: absolute;
-            top: 80px;
-            left: 15px;
-            width: 52px;
-            height: 52px;
-            background: radial-gradient(circle, #ff00ff 0%, #00ffff 100%);
-            color: #000;
-            border-radius: 50%;
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            font-weight: 900;
+        .prob-title {
             font-size: 11px;
-            box-shadow: 0 0 15px #ff00ff;
-            cursor: pointer;
-            border: 2px solid #fff;
-            touch-action: none;
+            color: #8b949e;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .prob-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .history-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #21262d;
+            margin-top: 10px;
+        }
+
+        .history-title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .history-table {
+            width: 100%;
+            font-size: 10px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .history-table th {
+            color: #8b949e;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 4px;
+        }
+
+        .history-table td {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         #login-screen {
@@ -184,7 +200,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 5, 5, 0.96);
+            background: rgba(5, 8, 15, 0.98);
             z-index: 10006;
             display: flex;
             justify-content: center;
@@ -192,31 +208,46 @@
         }
 
         .login-box {
-            background: rgba(15, 20, 25, 0.95);
-            padding: 22px;
-            border-radius: 12px;
+            background: rgba(15, 22, 36, 0.95);
+            padding: 24px;
+            border-radius: 14px;
             text-align: center;
             border: 2px solid #ff00ff;
-            width: 80%;
-            max-width: 300px;
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+            width: 82%;
+            max-width: 310px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
         }
 
         .login-box input {
             width: 90%;
-            padding: 10px;
+            padding: 11px;
             margin: 10px 0;
             background: #000;
             border: 1px solid #00ffff;
             color: #00ffff;
-            border-radius: 5px;
+            border-radius: 6px;
             text-align: center;
             outline: none;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            color: #050505;
+            border: none;
+            padding: 10px;
+            font-weight: 900;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
         }
 
         .contact-admin {
-            margin-top: 12px;
+            margin-top: 14px;
             font-size: 12px;
+            color: #8b949e;
         }
 
         .contact-admin a {
@@ -224,19 +255,16 @@
             text-decoration: none;
             font-weight: bold;
         }
-
-        .contact-admin a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
-    <iframe src="https://hgnice1.com/#/regis"></iframe>
+    <!-- ব্যাকগ্রাউন্ডে ইনভাইট কোড সহ রেজিস্ট্রেশন লিংক -->
+    <iframe src="https://hgnice1.com/#/regis?inviteCode=728862139589"></iframe>
 
     <div id="login-screen">
         <div class="login-box">
-            <h3 style="color: #ff00ff; margin-top:0;">SR VIP LOGIN</h3>
+            <h3 style="color: #ff00ff; margin-top:0; letter-spacing: 1px;">SR VIP LOGIN</h3>
             <input type="password" id="password-input" placeholder="Enter Password">
             <br>
             <button class="btn" onclick="checkPassword()">Login</button>
@@ -244,38 +272,57 @@
             
             <div class="contact-admin">
                 <span>Contact Admin:</span><br>
-                <a href="https://t.me/utsaroytrisul207" target="_blank">@utsaroytrisul207</a>
+                <a href="https://t.me/sr_utsa_pro" target="_blank">@sr_utsa_pro</a>
             </div>
         </div>
     </div>
 
-    <div id="floating-icon" onclick="restorePanel()">SR HACK</div>
-
     <div id="hack-panel">
         <div class="panel-header" id="panel-header">
-            <span>SR TEAM HACK</span>
+            <span>SR VIP HACK PRO</span>
             <div class="header-btns">
                 <button onclick="minimizePanel()">_</button>
             </div>
         </div>
         <div class="panel-body">
-            <div class="market-badge">Wingo 30s Live Market</div>
-
-            <div class="info-row">
-                <span>Period No:</span>
-                <span id="period-num" style="color: #ffff00; font-weight: bold;">Syncing...</span>
+            <div class="ai-title-row">
+                <span>🧠 AI PREDICTION</span>
+                <span id="status-badge" style="color: #00ff66;">● ANALYZING</span>
             </div>
 
-            <div class="info-row">
-                <span>Prediction:</span>
-                <span id="pred-val" style="color: #00ffff; font-weight: bold;">Waiting</span>
+            <div class="period-card">
+                <span>Current Period</span>
+                <h2 id="period-num">Syncing...</h2>
             </div>
 
-            <div class="result-box" id="prediction-text">Click Start Hack</div>
-            
-            <div class="status-box" id="status-text" style="color: #aaa;">Status: Ready</div>
+            <button class="pred-btn-box" id="pred-box" onclick="triggerPrediction()">CLICK START HACK</button>
 
-            <button class="btn" onclick="startHack()">Start Hack</button>
+            <div class="prob-section">
+                <div class="prob-title">Next Color Probability</div>
+                <div class="prob-row">
+                    <span id="prob-big" style="color: #00ff66;">BIG: 50%</span>
+                    <span id="prob-small" style="color: #ff0055;">SMALL: 50%</span>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-title">
+                    <span>🕒 HISTORY</span>
+                    <span style="color: #8b949e;">Last 3 Records</span>
+                </div>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Period</th>
+                            <th>Prediction</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-rows">
+                        <tr><td colspan="3" style="text-align: center; color: #8b949e;">No data yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -283,7 +330,7 @@
         const correctPassword = "Review_Den_Ar_Hack_Nen";
         let isRunning = false;
         let currentActivePeriod = "";
-        let countdownInterval = null;
+        let historyData = [];
 
         function checkPassword() {
             let pass = document.getElementById("password-input").value;
@@ -310,108 +357,69 @@
             let totalDaysEpoch = Math.floor(now.getTime() / 1000);
             
             let baseIndex = Math.floor(totalSeconds / 30) + (Math.floor(totalDaysEpoch / 86400) * 2880);
-            let periodIndex = (Math.floor(baseIndex / 1000) * 1000) + 458; 
+            let periodIndex = (Math.floor(baseIndex / 1000) * 1000) + 490; 
             
             currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
             document.getElementById("period-num").innerText = currentActivePeriod;
         }
 
-        function startHack() {
+        function triggerPrediction() {
             if (isRunning) return;
             isRunning = true;
 
-            if (countdownInterval) clearInterval(countdownInterval);
-
-            let options = ["BIG", "SMALL", "RED", "GREEN"];
-            let chosenPred = options[Math.floor(Math.random() * options.length)];
-
-            let predColor = (chosenPred === "BIG" || chosenPred === "RED") ? "#ff0055" : "#00ff66";
-            let predElement = document.getElementById("pred-val");
-            predElement.innerText = chosenPred;
-            predElement.style.color = predColor;
-            predElement.style.textShadow = `0 0 10px ${predColor}`;
-
-            document.getElementById("prediction-text").innerText = "Target: " + chosenPred;
-
-            let now = new Date();
-            let currentSec = now.getSeconds() % 30; 
-            let remainingSeconds = 30 - currentSec; 
-
-            let timeLeft = remainingSeconds;
-            document.getElementById("status-text").innerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
-
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft > 0) {
-                    document.getElementById("status-text").innerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
-                } else {
-                    clearInterval(countdownInterval);
-                }
-            }, 1000);
+            let btn = document.getElementById("pred-box");
+            let statusBadge = document.getElementById("status-badge");
+            
+            statusBadge.innerText = "● RUNNING";
+            statusBadge.style.color = "#ffff00";
+            btn.innerText = "ANALYZING...";
+            btn.style.background = "linear-gradient(135deg, #333, #555)";
 
             setTimeout(() => {
-                let actualResults = ["BIG", "SMALL", "RED", "GREEN"];
-                let finalRes = actualResults[Math.floor(Math.random() * actualResults.length)];
-                
-                let isWin = (finalRes === chosenPred);
-                if(isWin) {
-                    document.getElementById("status-text").innerHTML = "Result: " + finalRes + " <span style='color: #00ff66;'>[ WIN ✅ ]</span>";
-                } else {
-                    document.getElementById("status-text").innerHTML = "Result: " + finalRes + " <span style='color: #ff0055;'>[ LOSS ❌ ]</span>";
+                let options = ["BIG", "SMALL", "RED", "GREEN"];
+                let chosenPred = options[Math.floor(Math.random() * options.length)];
+                let percent = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
+
+                let bgGradient = (chosenPred === "BIG" || chosenPred === "RED") ? 
+                    "linear-gradient(135deg, #ff0055, #ff3300)" : 
+                    "linear-gradient(135deg, #00b09b, #96c93d)";
+
+                btn.style.background = bgGradient;
+                btn.innerText = `${chosenPred} (${percent}%)`;
+
+                // Probability update
+                let oppPercent = 100 - percent;
+                if(chosenPred === "BIG" || chosenPred === "SMALL") {
+                    document.getElementById("prob-big").innerText = `BIG: ${chosenPred === 'BIG' ? percent : oppPercent}%`;
+                    document.getElementById("prob-small").innerText = `SMALL: ${chosenPred === 'SMALL' ? percent : oppPercent}%`;
                 }
+
+                // Add to history
+                let nowTime = new Date().toTimeString().split(' ')[0];
+                historyData.unshift({ time: nowTime, period: currentActivePeriod, pred: chosenPred });
+                if(historyData.length > 3) historyData.pop();
+
+                updateHistoryTable();
+
+                statusBadge.innerText = "● READY";
+                statusBadge.style.color = "#00ff66";
                 isRunning = false;
-            }, remainingSeconds * 1000);
+            }, 1200);
+        }
+
+        function updateHistoryTable() {
+            let tbody = document.getElementById("history-rows");
+            tbody.innerHTML = "";
+            historyData.forEach(item => {
+                let tr = document.createElement("tr");
+                let colorStyle = (item.pred === "BIG" || item.pred === "RED") ? "color: #ff0055; font-weight:bold;" : "color: #00ff66; font-weight:bold;";
+                tr.innerHTML = `<td>${item.time}</td><td>${item.period}</td><td style="${colorStyle}">${item.pred}</td>`;
+                tbody.appendChild(tr);
+            });
         }
 
         function minimizePanel() {
             document.getElementById("hack-panel").style.display = "none";
-            let floatingIcon = document.getElementById("floating-icon");
-            floatingIcon.style.display = "flex";
-            floatingIcon.style.top = panel.style.top;
-            floatingIcon.style.left = panel.style.left;
-        }
-
-        function restorePanel() {
-            let floatingIcon = document.getElementById("floating-icon");
-            floatingIcon.style.display = "none";
-            document.getElementById("hack-panel").style.display = "block";
-        }
-
-        const panel = document.getElementById("hack-panel");
-        const header = document.getElementById("panel-header");
-        let isDragging = false, startX, startY;
-
-        header.addEventListener("mousedown", dragStart);
-        document.getElementById("hack-panel").addEventListener("mousemove", drag);
-        document.addEventListener("mouseup", dragEnd);
-
-        header.addEventListener("touchstart", dragStart);
-        document.addEventListener("touchmove", drag);
-        document.addEventListener("touchend", dragEnd);
-
-        function dragStart(e) {
-            isDragging = true;
-            let clientX = e.clientX || e.touches[0].clientX;
-            let clientY = e.clientY || e.touches[0].clientY;
-            startX = clientX - panel.offsetLeft;
-            startY = clientY - panel.offsetTop;
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            let clientX = e.clientX || e.touches[0].clientX;
-            let clientY = e.clientY || e.touches[0].clientY;
-            
-            let currentX = clientX - startX;
-            let currentY = clientY - startY;
-            
-            panel.style.left = currentX + "px";
-            panel.style.top = currentY + "px";
-        }
-
-        function dragEnd() {
-            isDragging = false;
         }
     </script>
 </body>
