@@ -26,7 +26,6 @@
             z-index: 1;
         }
 
-        /* প্রিমিয়াম মাল্টি-কালার রেইনবো বর্ডার ও গ্লোয়িং ইফেক্ট */
         @keyframes rainbowBorder {
             0% { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
             14% { border-color: #ff7700; box-shadow: 0 0 25px rgba(255, 119, 0, 0.5); }
@@ -214,6 +213,21 @@
             text-align: center;
             outline: none;
         }
+
+        .contact-admin {
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        .contact-admin a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-admin a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -226,7 +240,12 @@
             <input type="password" id="password-input" placeholder="Enter Password">
             <br>
             <button class="btn" onclick="checkPassword()">Login</button>
-            <p id="error-msg" style="color: red; font-size: 12px; margin-top: 5px;"></p>
+            <p id="error-msg" style="color: #ff3333; font-size: 11px; margin-top: 8px; font-weight: bold;"></p>
+            
+            <div class="contact-admin">
+                <span>Contact Admin:</span><br>
+                <a href="https://t.me/utsaroytrisul207" target="_blank">@utsaroytrisul207</a>
+            </div>
         </div>
     </div>
 
@@ -272,7 +291,7 @@
                 document.getElementById("login-screen").style.display = "none";
                 startLivePeriodTimer();
             } else {
-                document.getElementById("error-msg").innerText = "Pass vul diyeche!";
+                document.getElementById("error-msg").innerText = "ভুল পাসওয়ার্ড! ঠিক করে পাসওয়ার্ড দিন।";
             }
         }
 
@@ -306,7 +325,6 @@
             let options = ["BIG", "SMALL", "RED", "GREEN"];
             let chosenPred = options[Math.floor(Math.random() * options.length)];
 
-            // সিগন্যাল আসার সময় কালার পরিবর্তন ও গ্লোয়িং ইফেক্ট
             let predColor = (chosenPred === "BIG" || chosenPred === "RED") ? "#ff0055" : "#00ff66";
             let predElement = document.getElementById("pred-val");
             predElement.innerText = chosenPred;
@@ -320,7 +338,7 @@
             let remainingSeconds = 30 - currentSec; 
 
             let timeLeft = remainingSeconds;
-            document.getElementById("status-textinnerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
+            document.getElementById("status-text").innerHTML = "Status: Running (" + timeLeft + "s) <span style='color: #ffff00;'>[⏳]</span>";
 
             countdownInterval = setInterval(() => {
                 timeLeft--;
