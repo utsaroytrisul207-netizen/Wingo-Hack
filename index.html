@@ -39,7 +39,6 @@
             transform: translateX(-50%);
             width: 320px;
             max-height: 85vh;
-            overflow-y: auto;
             background: rgba(13, 17, 23, 0.95);
             backdrop-filter: blur(12px);
             color: #fff;
@@ -48,14 +47,7 @@
             border: 2px solid #00ffff;
             animation: rainbowBorder 5s infinite;
             box-sizing: border-box;
-        }
-
-        #hack-panel::-webkit-scrollbar {
-            width: 4px;
-        }
-        #hack-panel::-webkit-scrollbar-thumb {
-            background: #00ffff;
-            border-radius: 10px;
+            touch-action: none;
         }
 
         .panel-header {
@@ -70,6 +62,11 @@
             align-items: center;
             font-size: 13px;
             letter-spacing: 1px;
+            cursor: grab;
+        }
+
+        .panel-header:active {
+            cursor: grabbing;
         }
 
         .header-btns button {
@@ -84,6 +81,16 @@
 
         .panel-body {
             padding: 14px;
+            max-height: calc(85vh - 45px);
+            overflow-y: auto;
+        }
+
+        .panel-body::-webkit-scrollbar {
+            width: 4px;
+        }
+        .panel-body::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 10px;
         }
 
         .ai-title-row {
@@ -102,7 +109,7 @@
             border-radius: 10px;
             padding: 10px;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .period-card span {
@@ -114,9 +121,21 @@
 
         .period-card h2 {
             margin: 5px 0 0 0;
-            font-size: 17px;
+            font-size: 16px;
             color: #00ffcc;
             text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+        }
+
+        .timer-row {
+            text-align: center;
+            font-size: 13px;
+            color: #ffcc00;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 5px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,204,0,0.3);
         }
 
         .pred-btn-box {
@@ -126,36 +145,13 @@
             color: #fff;
             border: none;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             text-align: center;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 0, 85, 0.5);
             margin-bottom: 12px;
             letter-spacing: 1px;
-            transition: 0.2s;
-        }
-
-        .prob-section {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 12px;
-            border: 1px solid #21262d;
-        }
-
-        .prob-title {
-            font-size: 11px;
-            color: #8b949e;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-
-        .prob-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            font-weight: bold;
         }
 
         .history-box {
@@ -163,7 +159,7 @@
             border-radius: 10px;
             padding: 10px;
             border: 1px solid #21262d;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .history-title {
@@ -189,7 +185,7 @@
         }
 
         .history-table td {
-            padding: 5px 0;
+            padding: 6px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -277,15 +273,15 @@
 
     <div id="hack-panel">
         <div class="panel-header" id="panel-header">
-            <span>SR VIP HACK PRO</span>
+            <span id="header-title">SR VIP HACK PRO</span>
             <div class="header-btns">
-                <button onclick="minimizePanel()">_</button>
+                <button onclick="toggleMinimize(event)">_</button>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="panel-body">
             <div class="ai-title-row">
                 <span>🧠 AI PREDICTION</span>
-                <span id="status-badge" style="color: #00ff66;">● ANALYZING</span>
+                <span id="status-badge" style="color: #00ff66;">● LIVE</span>
             </div>
 
             <div class="period-card">
@@ -293,31 +289,27 @@
                 <h2 id="period-num">Syncing...</h2>
             </div>
 
-            <button class="pred-btn-box" id="pred-box" onclick="triggerPrediction()">CLICK START HACK</button>
-
-            <div class="prob-section">
-                <div class="prob-title">Next Color Probability</div>
-                <div class="prob-row">
-                    <span id="prob-big" style="color: #00ff66;">BIG: 50%</span>
-                    <span id="prob-small" style="color: #ff0055;">SMALL: 50%</span>
-                </div>
+            <div class="timer-row">
+                <span>Time Remaining: <strong id="timer-val">30s</strong></span>
             </div>
+
+            <div class="pred-btn-box" id="pred-box">WAITING...</div>
 
             <div class="history-box">
                 <div class="history-title">
                     <span>🕒 HISTORY</span>
-                    <span style="color: #8b949e;">Last 3 Records</span>
+                    <span style="color: #8b949e;">Live Result Log</span>
                 </div>
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>Time</th>
                             <th>Period</th>
-                            <th>Prediction</th>
+                            <th>Pred</th>
+                            <th>Result</th>
                         </tr>
                     </thead>
                     <tbody id="history-rows">
-                        <tr><td colspan="3" style="text-align: center; color: #8b949e;">No data yet</td></tr>
+                        <tr><td colspan="3" style="text-align: center; color: #8b949e;">Syncing records...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -326,81 +318,79 @@
 
     <script>
         const correctPassword = "Review_Den_Ar_Hack_Nen";
-        let isRunning = false;
         let currentActivePeriod = "";
+        let currentPrediction = "";
         let historyData = [];
+        let lastProcessedPeriod = "";
+        let isMinimized = false;
 
         function checkPassword() {
             let pass = document.getElementById("password-input").value;
             if(pass === correctPassword) {
                 document.getElementById("login-screen").style.display = "none";
-                startLivePeriodTimer();
+                startEngine();
             } else {
                 document.getElementById("error-msg").innerText = "ভুল পাসওয়ার্ড! ঠিক করে পাসওয়ার্ড দিন।";
             }
         }
 
-        function startLivePeriodTimer() {
-            updateLivePeriod();
-            setInterval(updateLivePeriod, 100);
+        function startEngine() {
+            setInterval(updateTimerAndPeriod, 1000);
+            updateTimerAndPeriod();
         }
 
-        function updateLivePeriod() {
+        function updateTimerAndPeriod() {
             let now = new Date();
             let year = now.getFullYear();
             let month = String(now.getMonth() + 1).padStart(2, '0');
             let day = String(now.getDate()).padStart(2, '0');
             
             let totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-            let totalDaysEpoch = Math.floor(now.getTime() / 1000);
+            let secInCycle = totalSeconds % 30;
+            let remainingSec = 30 - secInCycle;
             
+            document.getElementById("timer-val").innerText = remainingSec + "s";
+
+            let totalDaysEpoch = Math.floor(now.getTime() / 1000);
             let baseIndex = Math.floor(totalSeconds / 30) + (Math.floor(totalDaysEpoch / 86400) * 2880);
-            let periodIndex = (Math.floor(baseIndex / 1000) * 1000) + 490; 
+            let periodIndex = (Math.floor(baseIndex / 1000) * 1000) + (baseIndex % 1000);
             
             currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
             document.getElementById("period-num").innerText = currentActivePeriod;
-        }
 
-        function triggerPrediction() {
-            if (isRunning) return;
-            isRunning = true;
+            if (currentActivePeriod !== lastProcessedPeriod) {
+                if (lastProcessedPeriod !== "") {
+                    let actualResults = ["BIG", "SMALL", "RED", "GREEN"];
+                    let actualRes = actualResults[Math.floor(Math.random() * actualResults.length)];
+                    let isWin = (currentPrediction === actualRes);
 
-            let btn = document.getElementById("pred-box");
-            let statusBadge = document.getElementById("status-badge");
-            
-            statusBadge.innerText = "● RUNNING";
-            statusBadge.style.color = "#ffff00";
-            btn.innerText = "ANALYZING...";
-            btn.style.background = "linear-gradient(135deg, #333, #555)";
-
-            setTimeout(() => {
-                let options = ["BIG", "SMALL", "RED", "GREEN"];
-                let chosenPred = options[Math.floor(Math.random() * options.length)];
-                let percent = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
-
-                let bgGradient = (chosenPred === "BIG" || chosenPred === "RED") ? 
-                    "linear-gradient(135deg, #ff0055, #ff3300)" : 
-                    "linear-gradient(135deg, #00b09b, #96c93d)";
-
-                btn.style.background = bgGradient;
-                btn.innerText = `${chosenPred} (${percent}%)`;
-
-                let oppPercent = 100 - percent;
-                if(chosenPred === "BIG" || chosenPred === "SMALL") {
-                    document.getElementById("prob-big").innerText = `BIG: ${chosenPred === 'BIG' ? percent : oppPercent}%`;
-                    document.getElementById("prob-small").innerText = `SMALL: ${chosenPred === 'SMALL' ? percent : oppPercent}%`;
+                    historyData.unshift({
+                        period: lastProcessedPeriod.slice(-4),
+                        pred: currentPrediction,
+                        status: isWin ? "WIN ✅" : "LOSS ❌",
+                        isWin: isWin
+                    });
+                    if(historyData.length > 5) historyData.pop();
+                    updateHistoryTable();
                 }
 
-                let nowTime = new Date().toTimeString().split(' ')[0];
-                historyData.unshift({ time: nowTime, period: currentActivePeriod, pred: chosenPred });
-                if(historyData.length > 3) historyData.pop();
+                lastProcessedPeriod = currentActivePeriod;
+                generateNewPrediction();
+            }
+        }
 
-                updateHistoryTable();
+        function generateNewPrediction() {
+            let options = ["BIG", "SMALL", "RED", "GREEN"];
+            currentPrediction = options[Math.floor(Math.random() * options.length)];
+            
+            let btn = document.getElementById("pred-box");
+            btn.innerText = currentPrediction;
 
-                statusBadge.innerText = "● READY";
-                statusBadge.style.color = "#00ff66";
-                isRunning = false;
-            }, 1200);
+            if (currentPrediction === "BIG" || currentPrediction === "RED") {
+                btn.style.background = "linear-gradient(135deg, #ff0055, #ff3300)";
+            } else {
+                btn.style.background = "linear-gradient(135deg, #00b09b, #96c93d)";
+            }
         }
 
         function updateHistoryTable() {
@@ -408,14 +398,63 @@
             tbody.innerHTML = "";
             historyData.forEach(item => {
                 let tr = document.createElement("tr");
-                let colorStyle = (item.pred === "BIG" || item.pred === "RED") ? "color: #ff0055; font-weight:bold;" : "color: #00ff66; font-weight:bold;";
-                tr.innerHTML = `<td>${item.time}</td><td>${item.period}</td><td style="${colorStyle}">${item.pred}</td>`;
+                let statusColor = item.isWin ? "color: #00ff66; font-weight:bold;" : "color: #ff0055; font-weight:bold;";
+                tr.innerHTML = `<td>${item.period}</td><td>${item.pred}</td><td style="${statusColor}">${item.status}</td>`;
                 tbody.appendChild(tr);
             });
         }
 
-        function minimizePanel() {
-            document.getElementById("hack-panel").style.display = "none";
+        function toggleMinimize(e) {
+            e.stopPropagation();
+            let body = document.getElementById("panel-body");
+            let panel = document.getElementById("hack-panel");
+            if (!isMinimized) {
+                body.style.display = "none";
+                panel.style.width = "140px";
+                document.getElementById("header-title").innerText = "SR HACK";
+                isMinimized = true;
+            } else {
+                body.style.display = "block";
+                panel.style.width = "320px";
+                document.getElementById("header-title").innerText = "SR VIP HACK PRO";
+                isMinimized = false;
+            }
+        }
+
+        // Draggable Logic for both Normal and Minimized states
+        const panel = document.getElementById("hack-panel");
+        const header = document.getElementById("panel-header");
+        let isDragging = false, startX, startY;
+
+        header.addEventListener("mousedown", dragStart);
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", dragEnd);
+
+        header.addEventListener("touchstart", dragStart, {passive: false});
+        document.addEventListener("touchmove", drag, {passive: false});
+        document.addEventListener("touchend", dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            let clientX = e.clientX || e.touches[0].clientX;
+            let clientY = e.clientY || e.touches[0].clientY;
+            startX = clientX - panel.offsetLeft;
+            startY = clientY - panel.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            let clientX = e.clientX || e.touches[0].clientX;
+            let clientY = e.clientY || e.touches[0].clientY;
+            
+            panel.style.left = (clientX - startX) + "px";
+            panel.style.top = (clientY - startY) + "px";
+            panel.style.transform = "none";
+        }
+
+        function dragEnd() {
+            isDragging = false;
         }
     </script>
 </body>
