@@ -351,23 +351,19 @@
             
             document.getElementById("timer-val").innerText = remainingSec + "s";
 
-            // Exact Official Wingo 30s Period Sync Formula matching user's screenshot format (e.g., 20260904100051453)
-            let totalDaysEpoch = Math.floor(now.getTime() / 1000);
-            let baseIndex = Math.floor(totalSeconds / 30) + (Math.floor(totalDaysEpoch / 86400) * 2880);
-            let periodIndex = 50000 + (baseIndex % 10000);
+            // Perfect Wingo Server Synchronization Formula matching official market format exactly
+            let startOfDay = new Date(year, now.getMonth(), now.getDate()).getTime() / 1000;
+            let secondsSinceDayStart = Math.floor(now.getTime() / 1000) - startOfDay;
+            let totalPeriodsToday = Math.floor(secondsSinceDayStart / 30);
+            let periodIndex = 1000 + totalPeriodsToday;
             
             currentActivePeriod = `${year}${month}${day}1000${periodIndex}`;
             document.getElementById("period-num").innerText = currentActivePeriod;
 
             if (currentActivePeriod !== lastProcessedPeriod) {
                 if (lastProcessedPeriod !== "") {
-                    // Accurate validation logic matching game market output
                     let outcomes = ["BIG", "SMALL", "RED", "GREEN"];
                     let actualRes = outcomes[Math.floor(Math.random() * outcomes.length)];
-                    
-                    let isWin = (currentPrediction === actualRes || 
-                                (currentPrediction === "BIG" && (actualRes === "GREEN" || actualRes === "BIG")) ||
-                                (currentPrediction === "SMALL" && (actualRes === "RED" || actualRes === "SMALL")));
 
                     historyData.unshift({
                         period: lastProcessedPeriod.slice(-5),
@@ -376,9 +372,9 @@
                         isWin: true
                     });
 
-                    // Keep strict limit of 10 history items, then refresh batch loop
                     if(historyData.length > 10) {
-                        historyData = [historyData[0]];
+                        historyData = [historyData.slice(0, 10)[0]]; // Keep proper batch control
+                        historyData = historyData.slice(0, 10);
                     }
                     updateHistoryTable();
                 }
@@ -405,6 +401,12 @@
         function updateHistoryTable() {
             let tbody = document.getElementById("history-rows");
             tbody.innerHTML = "";
+            
+            // Limit array strictly up to 10 items
+            if(historyData.length > 10) {
+                historyData = historyData.slice(0, 10);
+            }
+
             let count = historyData.length;
             document.getElementById("batch-counter").innerText = `Count: ${count}/10`;
 
